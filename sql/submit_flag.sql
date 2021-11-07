@@ -30,7 +30,7 @@ BEGIN
 		ORDER BY time DESC
 		LIMIT 1;
 
-	_gain := (_removed = FALSE AND _change < _points) OR (_removed = TRUE AND _change < -_points);
+	_gain := (_removed = FALSE AND _points > 0) OR (_removed = TRUE AND _points < 0);
 
 	IF _change IS NULL AND _present = _gain THEN
 		RETURN 0;
