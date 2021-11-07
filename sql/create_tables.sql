@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS flags (
 CREATE TABLE IF NOT EXISTS machines (
 	id CHAR(14) NOT NULL,
 	uid CHAR(32) NOT NULL,
-	created_at TIMESTAMP,
+	created_at TIMESTAMP NOT NULL,
 	machine machine NOT NULL,
 	PRIMARY KEY(id, uid)
 );
