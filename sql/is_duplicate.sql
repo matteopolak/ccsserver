@@ -19,17 +19,21 @@ BEGIN
 
 	IF _time IS NULL THEN
 		INSERT INTO machines VALUES (
-			_id, _uid, NOW()
+			_id, _uid, NOW(), _machine
 		);
+
+		DELETE FROM points
+			WHERE id = _id AND machine = _machine;
 
 		RETURN false;
 	END IF;
 
-	SELECT count(1) > 0, MAX(machines.created_at) INTO _present, _time
+	SELECT count(1) > 0 INTO _present
 		FROM machines
-		WHERE machines.uid = _uid AND machines.id = _id AND machines.created_at > _time;
-	
-	IF _present AND NOW() - _time < '300 sec'::interval THEN
+		WHERE machines.machine = _machine AND machines.id = _id AND machines.created_at > _time
+		LIMIT 1;
+
+	IF _present THEN
 		RETURN true;
 	END IF;
 
