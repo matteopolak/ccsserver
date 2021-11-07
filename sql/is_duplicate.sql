@@ -30,7 +30,7 @@ BEGIN
 
 	SELECT count(1) > 0 INTO _present
 		FROM machines
-		WHERE machines.machine = _machine AND machines.id = _id AND machines.created_at > _time
+		WHERE machines.uid != _uid AND machines.machine = _machine AND machines.id = _id AND machines.created_at >= _time
 		LIMIT 1;
 
 	IF _present THEN
