@@ -1,0 +1,29 @@
+{
+  "name": "cyberpatriot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc && node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matteopolak/cyberpatriot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matteopolak/cyberpatriot/issues"
+  },
+  "homepage": "https://github.com/matteopolak/cyberpatriot#readme",
+  "type": "module",
+  "dependencies": {
+    "fastify": "^3.22.0",
+    "fastify-cors": "^6.0.2",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.0",
+    "@types/pg": "^8.6.1"
+  }
+}
