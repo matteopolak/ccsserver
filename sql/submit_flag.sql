@@ -6,6 +6,7 @@ DECLARE
 	_machine machine;
 	_points SMALLINT;
 	_change SMALLINT;
+	_gain BOOLEAN;
 BEGIN
 	SELECT count(1) > 0 INTO _present
 		FROM teams
@@ -15,7 +16,7 @@ BEGIN
 		RETURN 0;
 	END IF;
 	
-	SELECT flags.machine, flags.points INTO _machine, _points
+	SELECT flags.machine, flags.points, flags.penalty INTO _machine, _points, _present
 		FROM flags
 		WHERE flags.hash = _flag;
 	
@@ -28,6 +29,12 @@ BEGIN
 		WHERE points.hash = _flag
 		ORDER BY time DESC
 		LIMIT 1;
+
+	_gain := (_removed = FALSE AND _change < _points) OR (_removed = TRUE AND _change < -_points)
+
+	IF _change IS NULL AND _present = _gain THEN
+		RETURN 0;
+	END IF;
 
 	_present := _change IS NULL OR (_removed = FALSE AND _change = -_points) OR (_removed = TRUE AND _change = _points);
 	
